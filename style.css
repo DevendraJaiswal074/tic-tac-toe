@@ -1,84 +1,100 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: poppins;
-
-  /* background-color: #548687; */
-  /* background-color: #136f63; */
-  background-color: #003b50;
+  font-family: Poppins, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   text-align: center;
+  min-height: 100vh;
+  color: #fff;
 }
 
 h1 {
-  color: #fff;
-  margin-top: 50px;
+  margin-top: 30px;
+  font-size: 2.5rem;
 }
 
+.controls {
+  margin: 15px;
+}
 
+select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 0 5px;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #fef9c3;
+}
 
 .container {
-  height: 70vh;
+  height: 60vh;
   display: flex;
-
   justify-content: center;
   align-items: center;
 }
 
 .game {
-  height: 60vmin;
-  width: 60vmin;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5vmin;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 .box {
-  height: 18vmin;
-  width: 18vmin;
-  border-radius: 1rem;
+  width: 100px;
+  height: 100px;
+  background: #fef9c3;
+  border-radius: 12px;
   border: none;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
-  font-size: 8vmin;
-  color: #b0413e;
-  background-color: #ffffc7;
-  /* background-color: #136f63; */
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s, background 0.3s;
 }
 
-#reset-btn {
-  padding: 1rem;
-  font-size: 1.25rem;
-  background-color: #191913;
+.box:hover {
+  transform: scale(1.1);
+  background: #fde68a;
+}
+
+.win {
+  animation: pulse 0.6s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+#reset-btn, #new-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #111827;
   color: #fff;
-  border-radius: 1rem;
   border: none;
-}
-
-#new-btn {
-  padding: 1rem;
-  font-size: 1.25rem;
-  background-color: #191913;
-  color: #fff;
-  border-radius: 1rem;
-  border: none;
-}
-
-#msg {
-  color: #ffffc7;
-  font-size: 5vmin;
+  cursor: pointer;
 }
 
 .msg-container {
-  height: 100vmin;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 4rem;
+  gap: 20px;
 }
 
 .hide {
