@@ -1,4 +1,4 @@
-#🎮 Tic Tac Toe Game
+<img width="914" height="415" alt="Screenshot 2026-01-22 193818" src="https://github.com/user-attachments/assets/49b0a136-af76-4836-ba19-d9e2d5a184fa" />## 🎮 Tic Tac Toe Game
 
 A modern and interactive Tic Tac Toe web game built using **HTML, CSS, and JavaScript**.  
 The game supports both **Two-Player mode** and **Single-Player mode vs AI**, with sound effects, animations, and score tracking.
@@ -7,7 +7,10 @@ The game supports both **Two-Player mode** and **Single-Player mode vs AI**, wit
 👉 https://tic-tac-toe-omega-blush-32.vercel.app
 
 ---
-#✨ Features
+## ✨ Features<img width="920" height="406" alt="3" src="https://github.com/user-attachments/assets/5128fa86-85ac-4abc-a845-208095515db6" />
+<img width="917" height="408" alt="2" src="https://github.com/user-attachments/assets/2efef29f-84c3-4702-a0be-a743a8a85b94" />
+<img width="914" height="415" alt="Screenshot 2026-01-22 193818" src="https://github.com/user-attachments/assets/3759616f-9cb6-4ae6-bce0-36810490c440" />
+
 
 - 🧑‍🤝‍🧑 **Two Player Mode**
 - 🤖 **Play vs AI**
