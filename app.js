@@ -22,9 +22,9 @@ let scoreX = 0;
 let scoreO = 0;
 
 const winPatterns = [
-  [0,1,2],[3,4,5],[6,7,8],
-  [0,3,6],[1,4,7],[2,5,8],
-  [0,4,8],[2,4,6]
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6]
 ];
 
 modeSelect.addEventListener("change", () => {
@@ -54,13 +54,17 @@ boxes.forEach((box, index) => {
 
     playMove(index, currentPlayer);
 
-    if (modeSelect.value === "ai" && currentPlayer === "O" && gameActive) {
-      setTimeout(aiMove, 400);
+    if (modeSelect.value === "ai" && gameActive && currentPlayer === "O") {
+      setTimeout(() => {
+        if (gameActive) aiMove();
+      }, 400);
     }
   });
 });
 
 const playMove = (index, player) => {
+  if (!gameActive) return;
+
   board[index] = player;
   boxes[index].textContent = player;
   boxes[index].disabled = true;
@@ -69,7 +73,12 @@ const playMove = (index, player) => {
   if (checkWinner(player)) {
     updateScore(player);
     highlightWin(player);
-    endGame(`${player === "X" ? "Player X" : "Player O"} Wins!`, winSound);
+
+    if (player === "O" && modeSelect.value === "ai") {
+      endGame("You Lost! AI Wins 🤖", winSound);
+    } else {
+      endGame(`Player ${player} Wins!`, winSound);
+    }
     return;
   }
 
@@ -81,6 +90,7 @@ const playMove = (index, player) => {
   currentPlayer = player === "X" ? "O" : "X";
 };
 
+
 const aiMove = () => {
   let index =
     difficultySelect.value === "easy" ? randomMove() : smartMove();
@@ -88,8 +98,8 @@ const aiMove = () => {
 };
 
 const randomMove = () => {
-  const empty = board.map((v,i)=>v===""?i:null).filter(v=>v!==null);
-  return empty[Math.floor(Math.random()*empty.length)];
+  const empty = board.map((v, i) => v === "" ? i : null).filter(v => v !== null);
+  return empty[Math.floor(Math.random() * empty.length)];
 };
 
 const smartMove = () => {
@@ -121,7 +131,8 @@ const updateScore = (player) => {
   if (player === "X") {
     scoreX++;
     scoreXEl.textContent = scoreX;
-  } else {
+  }
+  else if (player === "O") {
     scoreO++;
     scoreOEl.textContent = scoreO;
   }
@@ -132,7 +143,7 @@ const endGame = (text, sound) => {
   msgContainer.classList.remove("hide");
   gameActive = false;
 
-  // Disable all boxes
+  //  Disable all boxes
   boxes.forEach(box => box.disabled = true);
 
   sound.play();
