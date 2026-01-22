@@ -27,7 +27,6 @@ const winPatterns = [
   [0,4,8],[2,4,6]
 ];
 
-// Mode change
 modeSelect.addEventListener("change", () => {
   scoreOText.innerHTML =
     modeSelect.value === "ai"
@@ -35,20 +34,20 @@ modeSelect.addEventListener("change", () => {
       : `Player O: <span id="scoreO">${scoreO}</span>`;
 });
 
-// Reset game
 const resetGame = () => {
   board.fill("");
   currentPlayer = "X";
   gameActive = true;
+
   boxes.forEach(box => {
     box.textContent = "";
     box.disabled = false;
     box.classList.remove("win");
   });
+
   msgContainer.classList.add("hide");
 };
 
-// Box click
 boxes.forEach((box, index) => {
   box.addEventListener("click", () => {
     if (!gameActive || board[index]) return;
@@ -56,12 +55,11 @@ boxes.forEach((box, index) => {
     playMove(index, currentPlayer);
 
     if (modeSelect.value === "ai" && currentPlayer === "O" && gameActive) {
-      setTimeout(aiMove, 500);
+      setTimeout(aiMove, 400);
     }
   });
 });
 
-// Play move
 const playMove = (index, player) => {
   board[index] = player;
   boxes[index].textContent = player;
@@ -83,14 +81,12 @@ const playMove = (index, player) => {
   currentPlayer = player === "X" ? "O" : "X";
 };
 
-// AI move
 const aiMove = () => {
   let index =
     difficultySelect.value === "easy" ? randomMove() : smartMove();
   playMove(index, "O");
 };
 
-// AI logic
 const randomMove = () => {
   const empty = board.map((v,i)=>v===""?i:null).filter(v=>v!==null);
   return empty[Math.floor(Math.random()*empty.length)];
@@ -110,11 +106,9 @@ const smartMove = () => {
   return randomMove();
 };
 
-// Winner check
 const checkWinner = (player) =>
   winPatterns.some(p => p.every(i => board[i] === player));
 
-// Highlight win
 const highlightWin = (player) => {
   winPatterns.forEach(p => {
     if (p.every(i => board[i] === player)) {
@@ -123,7 +117,6 @@ const highlightWin = (player) => {
   });
 };
 
-// Score update
 const updateScore = (player) => {
   if (player === "X") {
     scoreX++;
@@ -134,11 +127,14 @@ const updateScore = (player) => {
   }
 };
 
-// End game
 const endGame = (text, sound) => {
   msg.textContent = text;
   msgContainer.classList.remove("hide");
   gameActive = false;
+
+  // Disable all boxes
+  boxes.forEach(box => box.disabled = true);
+
   sound.play();
 };
 
